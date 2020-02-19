@@ -13,9 +13,9 @@ using namespace Eigen;
 using namespace std;
 
 
-void support(const void *_obj, const ccd_vec3_t *_d, ccd_vec3_t *_p);
-void stub_dir(const void *obj1, const void *obj2, ccd_vec3_t *dir);
-void center(const void *_obj, ccd_vec3_t *dir);
+static void support(const void *_obj, const ccd_vec3_t *_d, ccd_vec3_t *_p);
+static void stub_dir(const void *obj1, const void *obj2, ccd_vec3_t *dir);
+static void center(const void *_obj, ccd_vec3_t *dir);
 
 
 
@@ -473,12 +473,5 @@ void center(const void *_obj,ccd_vec3_t *center)
   for (int i=0;i<3;i++)
     center->v[i]=obj->COM(i);
 }
-
-
-
-
-
-
-
 
 #endif
