@@ -84,7 +84,8 @@ static Eigen::RowVector3d T1, T2, TP;
    ============================================================================
 */
 
-/*void readPolyhedron(char *name, POLYHEDRON *p)
+#if 0
+static void readPolyhedron(char *name, POLYHEDRON *p)
 {
   FILE *fp;
   char line[200], *c;
@@ -113,7 +114,7 @@ static Eigen::RowVector3d T1, T2, TP;
     for (j = 0; j < f->numVerts; j++) fscanf(fp, "%d", &f->verts[j]);
 
     /* compute face normal and offset w from first 3 vertices */
-    /*dx1 = p->verts[f->verts[1]][X] - p->verts[f->verts[0]][X];
+    dx1 = p->verts[f->verts[1]][X] - p->verts[f->verts[0]][X];
     dy1 = p->verts[f->verts[1]][Y] - p->verts[f->verts[0]][Y];
     dz1 = p->verts[f->verts[1]][Z] - p->verts[f->verts[0]][Z];
       
@@ -137,7 +138,8 @@ static Eigen::RowVector3d T1, T2, TP;
 
   fclose(fp);
 
-}*/
+}
+#endif
 
 /*
    ============================================================================
@@ -147,7 +149,7 @@ static Eigen::RowVector3d T1, T2, TP;
 
 
 /* compute various integrations over projection of face */
-void compProjectionIntegrals(const Eigen::MatrixXd& V, const Eigen::RowVectorXi& f)
+static void compProjectionIntegrals(const Eigen::MatrixXd& V, const Eigen::RowVectorXi& f)
 {
   double a0, a1, da;
   double b0, b1, db;
@@ -203,7 +205,7 @@ void compProjectionIntegrals(const Eigen::MatrixXd& V, const Eigen::RowVectorXi&
   Pabb /= -60.0;
 }
 
-void compFaceIntegrals(const Eigen::MatrixXd& V, const Eigen::RowVectorXi& f, const Eigen::RowVector3d& n)
+static void compFaceIntegrals(const Eigen::MatrixXd& V, const Eigen::RowVectorXi& f, const Eigen::RowVector3d& n)
 {
     double w;
     double k1, k2, k3, k4;
@@ -235,7 +237,7 @@ void compFaceIntegrals(const Eigen::MatrixXd& V, const Eigen::RowVectorXi& f, co
 	 + w*(2*(n(A)*Paa + n(B)*Pab) + w*Pa));
 }
 
-void compVolumeIntegrals(const Eigen::MatrixXd& V, const Eigen::MatrixXi& T)
+static void compVolumeIntegrals(const Eigen::MatrixXd& V, const Eigen::MatrixXi& T)
 {
     Eigen::MatrixXd N;
     igl::per_face_normals(V,T, N);
@@ -275,7 +277,7 @@ void compVolumeIntegrals(const Eigen::MatrixXd& V, const Eigen::MatrixXi& T)
 
 //computes mass (by uniform density), center of mass, and inertia tensor (around the COM with the canonical axis system) for a polygon
 
-void getCOMandInvIT(const Eigen::MatrixXd& V, const Eigen::MatrixXi& T, const double density, double& mass, Eigen::RowVector3d& COM, Eigen::Matrix3d& invIT){
+static void getCOMandInvIT(const Eigen::MatrixXd& V, const Eigen::MatrixXi& T, const double density, double& mass, Eigen::RowVector3d& COM, Eigen::Matrix3d& invIT){
     
     compVolumeIntegrals(V, T);
 
