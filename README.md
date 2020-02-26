@@ -181,5 +181,11 @@ Here are detailed answers to common questions. Please read through whenever you 
 <span style="color:blue">A:</span> This is a rare bug that would suggest some SSL issues with the specific computer. To counter this, clone instead the ``dev`` branch of ``libigl`` independently into the libigl folder, download all the external libraries libigl needs (eigen, glad, glfw, imgui and libigl-imgui) manually, and add them to the external folder.
 Finally, set the LIBIGL_SKIP_DOWNLOAD variable to ON (```cmake -DLIBIGL_SKIP_DOWNLOAD=ON ..```), then proceeded to run CMake normally from there. 
 
+<span style="color:blue">Q:</span> Why is the demo not working out of the box?
+<span style="color:blue">A:</span>: with the same parameters as your input program: infomgp_practical1 "folder_name_without_slash" "name of txt scene files".
+
+<span style="color:blue">Q:</span> How do I do inverse mass weighting for linear interpenetration?
+<span style="color:blue">A:</span>: Given two objects with masses $m_1,m_2$ interpenetrating in mutual distance $d$, their individual corrections need to be $d_1=\frac{d \cdot m_1}{m_1+m_2}$ and respectively for $d_2$. Note that: 1) the lighter object needs to move more (that's why it's inverse) 2) if one object is fixed, it's like it has infinite mass, and the other object moves all the way back.
+
 
 # Good work!
